@@ -1,0 +1,88 @@
+=========================== INSTRUCTIONS============================
+   Follow the instructions below to complete this lab assignment. The
+   mongoose module has already been installed and all URL handlers and
+   mongoose CRUD operations have already been included for you.
+   These are the same operations you created in your previous lab.
+====================================================================
+
+============================== STEP 1 ==============================
+   CONNECTION STRING (index.js)
+   Modify the connection string in the mongoose.connect() method to match
+   the connection string to your MongoDB instance. Make sure the Database
+   is set to EmployeeApp. The connection string should be identical to
+   the one you used in your previous lab.
+====================================================================
+
+============================== STEP 2 ==============================
+   VALIDATION  (index.js)
+   Add regular expression validation for the Employee schema so the
+   email and phone meet a valid format. Visit http://www.regexlib.com/ to search
+   to search for regular expression which you can use in the schema for validation.
+   Test these using the the client interface or Postman/Reqbin before proceeding
+   (See Validation-Regular Expresisons - Module-9-schema-validation-and-filtering)
+====================================================================
+
+============================== STEP 3 ==============================
+   UNIQUE INDEX  (index.js)
+   Add a unique index to the email field for the Employee schema so only
+   a single unique email address that can be saved in the collection.
+   (See Indexes (Unique) - module-9-schema-validation-and-filtering)
+   
+   NOTE: if your current MongoDB collection contains duplicate emails
+         mongoose cannot create a unique index due to duplicates existing.
+         You need to manually remove duplicates or edit the documents to
+         make sure each document contains a unique email.
+   
+====================================================================
+
+============================== STEP 4 ==============================
+   ADD FILTER CAPABILITIES TO THE GET /api/employees HANDLER  (index.js)
+   
+   Modify the GET /api/employees/ handler to accept an optional "filter" query string
+   parameter in the URL. For example. you should be able to use the following URL to
+   return a single document that matches an email:
+   https://....../api/employees?filter={email:"abc@abc.com"}
+
+    a) In the GET /api/employees handler, check the "filter" query string parameter for value.
+       If it exists, parse the JSON string into an object and pass the object
+       into the find() method. If it doesn't exist, you can pass an empty object into
+       find() with no repercussions.
+       (See Creating the Ultimate Filter Endpoint - module-9-schema-validation-and-filtering)
+       
+       NOTE: Test your endpoint using Reqbin to make sure it works as intended
+             before proceeding!
+====================================================================
+
+============================== STEP 5 ==============================
+   ADD SEARCH FUNCTIONALITY ON THE CLIENT (public/script.js)
+
+    a) In the client script (public/script.js), modify the get getEmployeeList() method
+       to accept a filter object. If the filter object is undefined, set it to an empty
+       object {} or null. You can also do this by using setting a default right in the
+       method definition (function getEmployeeList(filter = {})...) Next, modify the url
+       string for the GET ajax to accept a filter query string, stringify the filter object
+       and append the string to the URL. Remember, you are looking for the final URL to look
+       something like /api/employees?filter={email: "abc@abc.com"}
+    
+    b) Find the click handler for the search button. it already contains the jQuery
+       to retreive the email search string. Create a new filter object with an email
+       property and set it to the search string. Pass this new object to the
+       getEmployeeList() method that now should accept a filter object based on step b.
+====================================================================*/
+
+============================== STEP 6 ==============================
+   TESTING
+   Test all functionality to make sure it works. Emails and Phone numbers
+   only accept valid values. No duplicate records with the same email should
+   be able to be created and you should be able to search for a single record based
+   on the email. Make sure everything works before proceeding to step 7!
+====================================================================
+
+============================== STEP 7 ==============================
+   RESTRUCTURE
+   Restructure this Node application by:
+   1. Moving the database connection string to the database.js file.
+   1. Moving the Employee model to the "models/employee.js" folder.
+   2. Moving the route handlers to the "routes/employee.js" folder.
+   (See Structuring Express Applications - Module-9-structuring-express-applications)
+====================================================================
